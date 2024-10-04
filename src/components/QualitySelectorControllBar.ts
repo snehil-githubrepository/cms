@@ -24,9 +24,9 @@ class QualitySelectorControllBar extends videojs.getComponent('Button') {
 
     dropUpMenu.innerHTML = `
       <ul class="bg-white dark:bg-gray-800 shadow-lg rounded-md mt-1">
-        <li class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-black dark:text-white" data-quality="1080"">1080p</li>
-        <li class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-black dark:text-white" data-quality="720"">720p</li>
-        <li class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-black dark:text-white" data-quality="360"">360p</li>
+        <li class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-black dark:text-white" data-quality="1080">1080p</li>
+        <li class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-black dark:text-white" data-quality="720">720p</li>
+        <li class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-black dark:text-white" data-quality="360">360p</li>
       </ul>
     `;
 
@@ -43,6 +43,7 @@ class QualitySelectorControllBar extends videojs.getComponent('Button') {
     });
     dropUpMenuElement.querySelectorAll('li').forEach((item) => {
       item.addEventListener('click', (e: any) => {
+        e.stopPropagation(); //prevent bubbling up
         const quality = e.target.getAttribute('data-quality');
         const urlParams = new URLSearchParams(window.location.search);
         if (quality !== urlParams.get('quality')) {
